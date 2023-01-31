@@ -1,5 +1,6 @@
 package com.devmountain.noteApp.Entities;
 
+import com.devmountain.noteApp.DTOs.UserDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -26,6 +27,15 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JsonBackReference
     private Set<Note> noteSet = new HashSet<>();
+
+    public User(UserDTO userDTO) {
+        if(userDTO.getUsername() != null){
+            this.username = userDTO.getUsername();
+        }
+        if(userDTO.getPassword() != null){
+            this.password = userDTO.getPassword();
+        }
+    }
 
     public Long getId() {
         return id;

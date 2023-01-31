@@ -1,5 +1,6 @@
 package com.devmountain.noteApp.Entities;
 
+import com.devmountain.noteApp.DTOs.NoteDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -21,6 +22,12 @@ public class Note {
     @ManyToOne
     @JsonBackReference
     private User user;
+
+    public Note(NoteDTO noteDTO) {
+        if(noteDTO.getBody() != null){
+            this.body = noteDTO.getBody();
+        }
+    }
 
     public User getUser() {
         return user;
