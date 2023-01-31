@@ -3,6 +3,7 @@ package com.devmountain.noteApp.Entities;
 import com.devmountain.noteApp.DTOs.UserDTO;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -11,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "Users")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
@@ -35,29 +37,5 @@ public class User {
         if(userDTO.getPassword() != null){
             this.password = userDTO.getPassword();
         }
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 }
