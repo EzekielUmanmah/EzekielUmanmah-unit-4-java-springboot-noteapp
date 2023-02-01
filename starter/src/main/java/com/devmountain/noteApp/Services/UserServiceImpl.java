@@ -13,6 +13,34 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService, UserService {
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
+    @Override
+    @Transactional
+    public List<String> addUser(UserDTO userDTO){
+        List<String> response = new ArrayList<>();
+        User user = new User(userDTO);
+        userRepository.saveAndFlush(user);
+        response.add("User successfully added.");
+        return response;
+    }
+
+    @Override
+    @Transactional
+    public List<String> userLogin(UserDTO userDTO){
+        List<String> response = new ArrayList<>();
+        Optional<User> userOptional = userRepository.findByUsername(userDTO.getUsername());
+
+        if (userOptional.isPresent() && passwordEncoder.matches(userDTO.getPassword(), userOptional.get().getPassword())) {
+            response.add("User successfully logged in.");
+            response.add(String.valueOf(userOptional.get().getId()));
+        } else {
+            response.add("Invalid username or password.");
+        }
+        return response;
+    }
 }
