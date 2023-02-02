@@ -10,7 +10,7 @@ public interface NoteService {
     @Transactional
     void addNote(NoteDTO noteDTO, Long userId);
 
-    void deleteNoteById(NoteDTO noteDTO);
+    void deleteNoteById(Long noteId);
 
     @Transactional
     void updateNoteById(NoteDTO noteDTO);
