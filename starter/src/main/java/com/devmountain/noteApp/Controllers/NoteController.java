@@ -1,7 +1,6 @@
 package com.devmountain.noteApp.Controllers;
 
 import com.devmountain.noteApp.DTOs.NoteDTO;
-import com.devmountain.noteApp.Entities.Note;
 import com.devmountain.noteApp.Services.NoteServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -26,7 +25,7 @@ public class NoteController {
     }
 
     @PutMapping
-    public void updateNoteById(NoteDTO noteDTO){
+    public void updateNoteById(@RequestBody NoteDTO noteDTO){
         noteService.updateNoteById(noteDTO);
     }
     @GetMapping("/user/{userId}")
@@ -34,7 +33,7 @@ public class NoteController {
         return noteService.getAllNotesByUserId(userId);
     }
 
-    @GetMapping("/noteId")
+    @GetMapping("/{noteId}")
     public Optional<NoteDTO> getNote(@PathVariable Long noteId){
         return noteService.getNoteById(noteId);
     }
